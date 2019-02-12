@@ -28,7 +28,7 @@ As part of signing something using DSA (digital signature algorithm) one must se
 ECDSA(Elliptic Curve Digital Signature Algorithm)とは楕円曲線デジタル署名アルゴリズムのことです。
 詳しくは<https://esac.jipdec.or.jp/intro/publicKey.html>、<https://sehermitage.web.fc2.com/cmath/sign_alg.html>、[Wikipedia](https://ja.wikipedia.org/wiki/楕円曲線DSA)等を参照してみてください。
 ざっくりいうと、署名における公開鍵やシステムのパラメータの決定に楕円曲線を利用するというものです。
-
+結果から言えば、この問題ではDSA方式の内容をサーベイできれば十分だったのでもしもし気になる方がいましたらご確認ください。
 
 # 回答方針
 本問題では、アルゴリズムの署名部分に着目します。
@@ -42,8 +42,19 @@ wikipediaより、乱数kは、
 
 そこで、式の中における
 <img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />
-部分を工夫して計算しなくてはいけません。そこで、<https://www.pebblewind.com/entry/2017/07/04/215544>を参考にすると、<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />は<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{n-2}\bmod&space;n" />という方法で計算できます。
+部分を工夫して計算しなくてはいけません。そこで、<https://www.pebblewind.com/entry/2017/07/04/215544>を参考にすると、<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />は<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{n-2}\bmod&space;n" />というべき乗の計算式で計算できます。
 
 以上の方針から、プログラムsample.pyを作成しました。
 
-hex(k)(=0xabad1dea)をそのまま入れるとAcceptされないので、最初の0xを除いた数値(abad1dea)が正解になります。
+hex(k)(=0xabad1dea)をそのまま入れるとAcceptされず、最初の0xを除いた数値(abad1dea)が正解になります。
+
+
+# 感想
+DSA暗号の脆弱性を知ることができた。
+
+この問題では、r1とr2が同じ値であることに気づいて回答の方針を立てる力が必要と思われる。
+
+Cryptはサーベイ力と実装力が大事。
+
+#️ 参考にしたWriteup
+<http://kent056-n.hatenablog.com/entry/2018/10/26/011953>
