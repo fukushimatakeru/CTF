@@ -1,5 +1,3 @@
-<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 # ECDSA Nonce Recovery Write up
 
 # 問題文  
@@ -34,13 +32,6 @@ ECDSA(Elliptic Curve Digital Signature Algorithm)とは楕円曲線デジタル�
 本問題では、アルゴリズムの署名部分に着目します。
 r1とr2が同じ値であることから、問題のシグネチャは同じ乱数kを用いて生成されたシグネチャであることがわかります。
 wikipediaより、乱数kは、
-```math
-\begin{array}{rr}
-& 12345\
-+&6789\
-\hline
-&13023
-\end{array}
-```
+<img src="https://latex.codecogs.com/gif.latex?X[n]&space;=&space;\sum_{k=0}^{N-1}x[k]\exp({-j\frac{2&space;\pi&space;nk}{N}})"/>
 <img src="https://latex.codecogs.com/gif.latex?\inline&space;k = \frac{H(m_1) - H(m_2)}{s_1 - s_2}" />
 で計算できます。
