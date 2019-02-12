@@ -35,3 +35,5 @@ wikipediaより、乱数kは、
 
 <img src="https://latex.codecogs.com/gif.latex?k&space;=&space;\frac{H(m_1)-H(m_2)}{s_1-s_2}\bmod&space;n" />
 で計算できます。
+
+しかし、そのまま計算したら<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />
