@@ -21,4 +21,15 @@ As part of signing something using DSA (digital signature algorithm) one must se
 ２度使えない理由として、二つの別々のメッセージに同じ乱数kで署名を行った場合、kが復元可能であるという脆弱性が存在するからです。
 
 この問題では、z1とz2に同じ乱数kで暗号化して、シグネチャ(s1,r1)とシグネチャ(s2,r2)を生成しています。
-問題文の趣旨としては、シグネチャ(s1,r1)とシグネチャ(s2,r2)を用いて乱数kを復元せよというものだと考えました。
+問題文の趣旨としては、シグネチャ(s1,r1)とシグネチャ(s2,r2)を用いて乱数kを復元せよというものかと思います。
+
+#️ ECDSAとは
+ECDSA(Elliptic Curve Digital Signature Algorithm)とは楕円曲線デジタル署名アルゴリズムのことです。
+詳しくは<https://esac.jipdec.or.jp/intro/publicKey.html>、<https://sehermitage.web.fc2.com/cmath/sign_alg.html>、[Wikipedia](https://ja.wikipedia.org/wiki/楕円曲線DSA)等を参照してみてください。
+ざっくりいうと、署名における公開鍵やシステムのパラメータの決定に楕円曲線を利用するというものです。
+
+本問題では、アルゴリズムの署名部分に着目します。
+r1とr2が同じ値であることから、問題のシグネチャは同じ乱数kを用いて生成されたシグネチャであることがわかります。
+wikipediaより、乱数kは、
+<img src="https://latex.codecogs.com/gif.latex?\k = \frac{H(m_1) - H(m_2)}{s_1 - s_2}" />
+で計算できます。
