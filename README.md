@@ -33,5 +33,5 @@ ECDSA(Elliptic Curve Digital Signature Algorithm)とは楕円曲線デジタル�
 r1とr2が同じ値であることから、問題のシグネチャは同じ乱数kを用いて生成されたシグネチャであることがわかります。
 wikipediaより、乱数kは、
 
-<img src="https://latex.codecogs.com/gif.latex?k&space;=&space;\frac{H(m_1)-H(m_2)}{s_1-s_2}&space;mod&space;n" />
+<img src="https://latex.codecogs.com/gif.latex?k&space;=&space;\frac{H(m_1)-H(m_2)}{s_1-s_2}&space;mod&space;&space;n" />
 で計算できます。
