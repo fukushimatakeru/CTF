@@ -1,3 +1,5 @@
+<script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 # ECDSA Nonce Recovery Write up
 
 # 問題文  
@@ -22,6 +24,7 @@ As part of signing something using DSA (digital signature algorithm) one must se
 
 この問題では、z1とz2に同じ乱数kで暗号化して、シグネチャ(s1,r1)とシグネチャ(s2,r2)を生成しています。
 問題文の趣旨としては、シグネチャ(s1,r1)とシグネチャ(s2,r2)を用いて乱数kを復元せよというものかと思います。
+
 
 #️ ECDSAとは
 ECDSA(Elliptic Curve Digital Signature Algorithm)とは楕円曲線デジタル署名アルゴリズムのことです。
