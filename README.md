@@ -16,7 +16,7 @@ As part of signing something using DSA (digital signature algorithm) one must se
 
 	n = 6277101735386680763835789423176059013767194773182842284081
 
-## 問題文の理解
+# 問題文の理解
 デジタル署名アルゴリズムは暗号学的に安全で、かつ秘密の乱数kを１度だけ選択して使用しています。
 ２度使えない理由として、二つの別々のメッセージに同じ乱数kで署名を行った場合、kが復元可能であるという脆弱性が存在するからです。
 
@@ -29,11 +29,21 @@ ECDSA(Elliptic Curve Digital Signature Algorithm)とは楕円曲線デジタル�
 詳しくは<https://esac.jipdec.or.jp/intro/publicKey.html>、<https://sehermitage.web.fc2.com/cmath/sign_alg.html>、[Wikipedia](https://ja.wikipedia.org/wiki/楕円曲線DSA)等を参照してみてください。
 ざっくりいうと、署名における公開鍵やシステムのパラメータの決定に楕円曲線を利用するというものです。
 
+
+# 回答方針
 本問題では、アルゴリズムの署名部分に着目します。
 r1とr2が同じ値であることから、問題のシグネチャは同じ乱数kを用いて生成されたシグネチャであることがわかります。
 wikipediaより、乱数kは、
 
 <img src="https://latex.codecogs.com/gif.latex?k&space;=&space;\frac{H(m_1)-H(m_2)}{s_1-s_2}\bmod&space;n" />
 で計算できます。
+ここではH(m1)=z1,H(m2)=z2です。
+しかし、そのまま計算したらエラーを吐きます。
 
-しかし、そのまま計算したら<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />
+そこで、式の中における
+<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />
+部分を工夫して計算しなくてはいけません。そこで、<https://www.pebblewind.com/entry/2017/07/04/215544>を参考にすると、<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{-1}\bmod&space;n" />は<img src="https://latex.codecogs.com/gif.latex?(s_1-s_2)^{n-2}\bmod&space;n" />という方法で計算できます。
+
+以上の方針から、プログラムsample.pyを作成しました。
+
+hex(k)(=0xabad1dea)をそのまま入れるとAcceptされないので、最初の0xを除いた数値(abad1dea)が正解になります。
