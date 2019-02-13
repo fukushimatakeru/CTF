@@ -8,17 +8,19 @@ r2 = 5568285309948811794296918647045908208072077338037998537885
 
 n = 6277101735386680763835789423176059013767194773182842284081
 
-def mod_inv(x):
+def mod_invese(x):
 	return pow(x, n - 2, n) #x^(n - 2) % n
 
+#こっちだとバグります
 try:
 	k = (z1 - z2)/(s1 - s2) % n
 	print(hex(k))
 except:
 	print("Error")
 
+##こっちだとうまくいきます
 try:
-	k = (z1 - z2)*mod_inv(s1 - s2) % n
+	k = (z1 - z2)*mod_invese(s1 - s2) % n
 	print(hex(k)[2:])#hex(k)の２文字目まで飛ばす.hex(k):kを１６進数で表記
 except:
 	print("Error")
